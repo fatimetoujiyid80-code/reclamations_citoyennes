@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'corsheaders',
     'rest_framework',
+    'drf_spectacular',
 
     'accounts',
     'complaints',
@@ -153,7 +154,14 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
     'EXCEPTION_HANDLER': 'reclamations_backend.exceptions.exception_handler',
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Plateforme de Gestion des Réclamations Citoyennes',
+    'DESCRIPTION': 'API de gestion des réclamations citoyennes',
+    'VERSION': '1.0.0',
+}
+
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),

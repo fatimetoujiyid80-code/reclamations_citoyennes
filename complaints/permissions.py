@@ -89,13 +89,17 @@ class PeutReaffecterReclamation(BasePermission):
 
 class PeutEvaluerReclamation(BasePermission):
     """
-    Double condition : le demandeur doit être le citoyen propriétaire ET
-    la réclamation doit être CLOTUREE (on n'évalue pas un dossier encore
-    en cours de traitement).
+    Triple condition : le demandeur doit être le citoyen propriétaire, la
+    réclamation doit être CLOTUREE, ET elle ne doit pas avoir déjà été
+    évaluée — une seule évaluation possible, définitive (décision validée).
     """
 
-    message = "Cette réclamation ne peut pas être évaluée par cet utilisateur."
+    message = "Cette réclamation ne peut pas être évaluée (auteur, une seule fois, après clôture uniquement)."
 
     def has_object_permission(self, request, view, obj):
         user = request.user
-        return obj.citoyen_id == user.id and obj.statut == StatutReclamation.CLOTUREE
+        return (
+            obj.citoyen_id == user.id
+            and obj.statut == StatutReclamation.CLOTUREE
+            and obj.note_citoyen is None
+        )
