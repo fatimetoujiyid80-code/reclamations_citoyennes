@@ -2,10 +2,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
 
 const NAV_LINKS_PAR_ROLE = {
-  CITOYEN: [{ label: "Accueil", path: "/citoyen" }],
+  CITOYEN: [
+  { label: "Accueil", path: "/citoyen" },
+  { label: "Notifications", path: "/citoyen/notifications" },
+],
   AGENT: [{ label: "Accueil", path: "/agent" }],
-  SUPERVISEUR: [{ label: "Accueil", path: "/superviseur" }],
-  DECIDEUR: [{ label: "Accueil", path: "/superviseur" }],
+  SUPERVISEUR: [
+    { label: "Accueil", path: "/superviseur" },
+    { label: "Dashboard", path: "/superviseur/dashboard" },
+  ],
+  DECIDEUR: [
+    { label: "Accueil", path: "/superviseur" },
+    { label: "Dashboard", path: "/superviseur/dashboard" },
+  ],
   ADMINISTRATEUR: [{ label: "Accueil", path: "/administrateur" }],
 };
 
@@ -42,3 +51,5 @@ function Navbar() {
 }
 
 export default Navbar;
+
+

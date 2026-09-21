@@ -29,8 +29,21 @@ export const ajouterMediaReclamation = async (id, fichier) => {
   formData.append("fichier", fichier);
   formData.append("type_media", typeMedia);
 
-  // Pas de Content-Type manuel : axios génère automatiquement l'en-tête
-  // multipart correct (avec sa "boundary") dès qu'il détecte un FormData.
   const response = await axiosClient.post(`complaints/reclamations/${id}/medias/`, formData);
+  return response.data;
+};
+
+export const changerStatutReclamation = async (id, statut, commentaire) => {
+  const response = await axiosClient.post(`complaints/reclamations/${id}/changer-statut/`, {
+    statut,
+    commentaire,
+  });
+  return response.data;
+};
+
+export const reaffecterReclamation = async (id, serviceId) => {
+  const response = await axiosClient.post(`complaints/reclamations/${id}/reaffecter/`, {
+    service: serviceId,
+  });
   return response.data;
 };
